@@ -27,6 +27,8 @@ crawler.on("fetchcomplete", function(queueItem, responseBuffer, response) {
   // responseBuffer.toString();
 });
 
+crawler.start();
+
 // try downloading the content from CollaMine servers
 function try_collamine(url) {
   var COLLAMINE_DOWNLOAD_URL = {
