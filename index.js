@@ -19,7 +19,9 @@ crawler.addFetchCondition(function(parsedURL) {
 // before fetch starts, check if doc exists in collamine
 crawler.on("fetchstart", function(queueItem) {
   console.log("Fetching", queueItem.url);
-  var collamine = try_collamine(queueItem.url);
+  try_collamine(queueItem.url, function(collamine) {
+  	console.log(collamine);
+  });
   if (collamine && collamine != 'not found') {
     queueItem.fetched = true;
     console.log(queueItem.status);
@@ -49,11 +51,11 @@ function try_collamine(url, callback) {
   return http.request(COLLAMINE_DOWNLOAD_URL, function(response) {
     var str = '';
     // another chunk of data has been recieved, so append it to `str`
-    response.on('data', function (chunk) {
+    response.on('data', function(chunk) {
       str += chunk;
     });
     // the whole response has been received
-    response.on('end', function () {
+    response.on('end', function() {
       callback(str);
     });
   }).end();
