@@ -45,14 +45,18 @@ function try_collamine(url) {
     port: '9001',
     path: '/download/html/' + encodeURIComponent(url)
   };
-  var str = '';  
+
   http.request(COLLAMINE_DOWNLOAD_URL, function(response) {
+    var str = '';
     // another chunk of data has been recieved, so append it to `str`
     response.on('data', function (chunk) {
       str += chunk;
     });
+    // the whole response has been received
+    response.on('end', function () {
+      callback(str);
+    });
   }).end();
-  return str;
 }
 
 // function upload_to_collamine() {
