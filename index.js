@@ -17,36 +17,37 @@ var conditionID = crawler.addFetchCondition(function(parsedURL) {
 
 crawler.on("fetchstart", function(queueItem) {
   console.log("Fetching", queueItem.url);
+  try_collamine(queueItem.url);
 });
 
 crawler.on("fetchcomplete", function(queueItem, responseBuffer, response) {
   console.log("Completed fetching resource:", queueItem.url);
   // if source == original then upload to collamine
-
-  //responseBuffer.toString();
+  // insert to db
+  // responseBuffer.toString();
 });
 
 // try downloading the content from CollaMine servers
-// function try_collamine(url) {
-//   var COLLAMINE_DOWNLOAD_URL = {
-//     host: 'http://127.0.0.1',
-//     port: '9001',
-//     path: '/download/html/'
-//   };
+function try_collamine(url) {
+  var COLLAMINE_DOWNLOAD_URL = {
+    host: '172.31.22.135',
+    port: '9001',
+    path: '/download/html/'
+  };
 
-//   http.request(options, function(response) {
-//     var str = '';
-//     //another chunk of data has been recieved, so append it to `str`
-//     response.on('data', function (chunk) {
-//       str += chunk;
-//     });
+  http.request(options, function(response) {
+    var str = '';
+    //another chunk of data has been recieved, so append it to `str`
+    response.on('data', function (chunk) {
+      str += chunk;
+    });
 
-//     //the whole response has been recieved, so we just print it out here
-//     response.on('end', function () {
-//       console.log(str);
-//     });
-//   }).end();
-// }
+    //the whole response has been recieved, so we just print it out here
+    response.on('end', function () {
+      console.log(str);
+    });
+  }).end();
+}
 
 // function upload_to_collamine() {
 //   var form = new FormData();
