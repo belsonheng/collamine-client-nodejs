@@ -32,7 +32,7 @@ function try_collamine(url) {
   var COLLAMINE_DOWNLOAD_URL = {
     host: '172.31.22.135',
     port: '9001',
-    path: 'download/html/'
+    path: '/download/html/' + encodeURIComponent(url)
   };
 
   http.request(COLLAMINE_DOWNLOAD_URL, function(response) {
