@@ -20,10 +20,15 @@ crawler.addFetchCondition(function(parsedURL) {
 crawler.on("fetchstart", function(queueItem) {
   console.log("Fetching", queueItem.url);
   var collamine = try_collamine(queueItem.url);
-  console.log(queueItem.fetched)
-  if (collamine != 'not found') {
-  	console.log('get from collamine');
+  if (collamine && collamine != 'not found') {
+    queueItem.fetched = true;
+    console.log(queueItem.status);
+    console.log(queueItem.stateData);
   }
+});
+
+crawler.on("fetchheaders", function(queueItem, responseObject) {
+  console.log("Headers for " + queueItem.url + " are received from the server. ");
 });
 
 crawler.on("fetchcomplete", function(queueItem, responseBuffer, response) {
