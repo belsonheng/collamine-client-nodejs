@@ -35,7 +35,7 @@ function try_collamine(url) {
     path: '/download/html/'
   };
 
-  http.request(options, function(response) {
+  http.request(COLLAMINE_DOWNLOAD_URL, function(response) {
     var str = '';
     //another chunk of data has been recieved, so append it to `str`
     response.on('data', function (chunk) {
