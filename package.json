@@ -3,6 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "simplecrawler": "*"
+    "simplecrawler": "0.5.2"
   }
 }
