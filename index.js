@@ -39,14 +39,14 @@ crawler.on("fetchcomplete", function(queueItem, responseBuffer, response) {
 });
 
 // try downloading the content from CollaMine servers
-function try_collamine(url) {
+function try_collamine(url, callback) {
   var COLLAMINE_DOWNLOAD_URL = {
     host: '172.31.22.135',
     port: '9001',
     path: '/download/html/' + encodeURIComponent(url)
   };
 
-  http.request(COLLAMINE_DOWNLOAD_URL, function(response) {
+  return http.request(COLLAMINE_DOWNLOAD_URL, function(response) {
     var str = '';
     // another chunk of data has been recieved, so append it to `str`
     response.on('data', function (chunk) {
